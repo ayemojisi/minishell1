@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 02:14:01 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/28 02:14:08 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:39 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }

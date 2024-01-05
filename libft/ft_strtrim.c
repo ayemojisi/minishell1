@@ -3,38 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/18 15:34:14 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/23 13:04:52 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:49:03 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_isset(char c, const char *set)
+char	*ft_strtrim(char const *s, char const *set)
 {
-	while (*set)
-		if (c == *set++)
-			return (1);
-	return (0);
-}
-
-char	*ft_strtrim(char const *source, const char *set)
-{
-	char	*ret;
-	char	*start;
-	char	*end;
+	char	*cuttedstring;
 	int		i;
+	int		endofs;
 
-	i = 1;
-	if (!source || !set)
-		return (0);
-	start = (char *)source;
-	end = start + ft_strlen(source);
-	while (*start && ft_isset(*start, set))
-		start++;
-	while (ft_isset(*(end - 1), set) && i++)
-		end--;
-	ret = ft_substr(start, 0, ft_strlen(start) + 1 - i);
-	return (ret);
+	if (s != NULL)
+	{
+		i = 0;
+		while (s[i] && ft_strchr(set, s[i]))
+			i++;
+		endofs = ft_strlen(s) - 1;
+		while (endofs > i && ft_strchr(set, s[endofs]))
+			endofs--;
+		cuttedstring = ft_substr(s, i, endofs - i + 1);
+		return (cuttedstring);
+	}
+	return (NULL);
 }

@@ -1,4 +1,4 @@
-prefix=/Users/iergun/Desktop/kocamanshell/eklememelih/melih1/readline
+prefix=/Users/iergun/Desktop/minishell/readline
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

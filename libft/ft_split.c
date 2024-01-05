@@ -3,64 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 14:45:54 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/27 13:04:23 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:49 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	wordcounter(const char *s, char c)
+static int	stringindex(char const *s, char c)
 {
-	int	i;
+	int	a;
 
-	i = 0;
-	while (*s)
+	a = 0;
+	if (*s)
 	{
-		while (*s == c && *s)
-			s++;
-		if (*s == '\0')
-			return (i);
-		while (*s != c && *s)
-			s++;
-		i++;
+		while (*s)
+		{
+			if (*s != c)
+			{
+				a++;
+				while (*s != c && *s)
+					s++;
+			}
+			else
+				s++;
+		}
 	}
-	return (i);
+	return (a);
 }
 
-int	start_split(char **ret, char const *s, char c)
+static char	*newarray(char const *s, char *returnarray, char c, int flag)
 {
-	int	i;
-	int	len;
+	int	x;
 
-	i = 0;
-	len = 0;
-	while (*s)
-	{
-		while (*s && *s != c)
-		{
-			len++;
-			s++;
-		}
-		if ((*s == c || *s == 0) && len > 0)
-			ret[i++] = ft_substr(s - len, 0, len);
-		len = 0;
-		if (*s != 0)
-			s++;
-	}
-	return (i);
+	x = flag;
+	while (s[x] != c && s[x] != 0)
+		x++;
+	returnarray = ft_substr(s, flag, x - flag);
+	return (returnarray);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**ret;
+	char	**splittedstring;
+	int		index;
+	int		a;
+	int		z;
 
 	if (!s)
-		return (0);
-	ret = malloc(sizeof(char *) * (wordcounter(s, c) + 1));
-	if (!ret)
-		return (0);
-	ret[start_split(ret, s, c)] = 0;
-	return (ret);
+		return (NULL);
+	z = 0;
+	a = 0;
+	index = stringindex(s, c);
+	splittedstring = (char **)malloc(sizeof(char *) * (index + 1));
+	if (!splittedstring)
+		return ((char **)ft_strdup(""));
+	while (a < index)
+	{
+		while (s[z] == c)
+			z++;
+		splittedstring[a] = newarray(s, splittedstring[a], c, z);
+		z = z + ft_strlen(splittedstring[a]);
+		a++;
+	}
+	splittedstring[a] = 0;
+	return (splittedstring);
 }

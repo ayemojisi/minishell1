@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 02:10:40 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/28 02:11:01 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:46 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	int	i;
+
+	i = -1;
 	if (!s)
 		return ;
-	write(fd, s, ft_strlen(s));
+	while (s[++i])
+		ft_putchar_fd(s[i], fd);
 }

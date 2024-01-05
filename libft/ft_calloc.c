@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 11:26:29 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/20 11:47:29 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:45:14 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+
 #include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*ret;
+	void	*array;
 
-	ret = malloc(size * count);
-	if (!ret)
-		return (0);
-	ft_bzero(ret, (count * size));
-	return (ret);
+	array = malloc(count * size);
+	if (!array)
+		return (NULL);
+	ft_bzero(array, count * size);
+	return (array);
 }

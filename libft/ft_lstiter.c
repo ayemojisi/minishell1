@@ -3,20 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 18:38:38 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/03 18:41:18 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:02 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list	*lst, void (*f)(void *))
 {
-	while (lst)
+	t_list	*iter;
+
+	if (lst && f)
 	{
-		f(lst->content);
-		lst = lst->next;
+		iter = lst;
+		while (iter)
+		{
+			f(iter->content);
+			iter = iter->next;
+		}
 	}
+	return ;
 }

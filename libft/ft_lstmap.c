@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 18:45:08 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/04 03:02:19 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:07 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list	*lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*ret;
-	t_list	*tmp;
+	t_list	*temp;
+	t_list	*a;
 
-	ret = 0;
-	while (lst)
+	temp = 0;
+	if (!del || !lst || !f)
+		return (0);
+	temp = 0;
+	while (lst != 0)
 	{
-		tmp = ft_lstnew(f(lst->content));
-		if (!tmp)
-		{
-			ft_lstclear(&ret, del);
-			return (0);
-		}
-		ft_lstadd_back(&ret, tmp);
+		a = ft_lstnew(f(lst->content));
+		if (!a)
+			ft_lstclear(&a, del);
+		ft_lstadd_back(&temp, a);
 		lst = lst->next;
 	}
-	return (ret);
+	return (temp);
 }

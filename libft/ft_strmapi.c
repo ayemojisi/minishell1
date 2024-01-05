@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 13:16:48 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/02 15:31:11 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:48:37 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*ret;
 	unsigned int	i;
+	int				len;
+	char			*returnarray;
 
-	if (!s)
-		return (0);
-	ret = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!ret)
-		return (0);
-	i = 0;
-	while (s[i])
-	{
-		ret[i] = f(i, s[i]);
-		i++;
-	}
-	ret[i] = 0;
-	return (ret);
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	returnarray = (char *)malloc(sizeof(char) * (len + 1));
+	if (!returnarray)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+		returnarray[i] = f(i, s[i]);
+	returnarray[i] = '\0';
+	return (returnarray);
 }

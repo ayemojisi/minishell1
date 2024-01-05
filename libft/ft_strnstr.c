@@ -3,37 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 13:44:41 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/17 16:29:19 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:48:44 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *dest, const char *src, size_t size)
 {
-	unsigned int		i;
-	unsigned int		j;
+	size_t	i;
+	size_t	j;
 
-	if (!haystack && !len)
-		return (0);
-	if (needle[0] == '\0')
-		return ((char *)haystack);
-	i = 0;
-	while (haystack[i] && i < len)
+	if (src[0] == '\0')
+		return ((char *)dest);
+	else
 	{
-		j = 0;
-		if (haystack[i] == needle[j])
+		i = -1;
+		while (++i < size && dest[i])
 		{
-			while (i + j < len && haystack[i + j] == needle[j])
+			j = 0;
+			while (dest[i + j] == src[j] && (i + j) < size)
 			{
+				if (src[j + 1] == '\0')
+					return ((char *)dest + i);
 				j++;
-				if (!needle[j])
-					return ((char *)&haystack[i]);
 			}
 		}
-		i++;
 	}
-	return (0);
+	return (NULL);
 }

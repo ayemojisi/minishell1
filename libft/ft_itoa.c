@@ -3,59 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 15:12:18 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/27 12:55:39 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:45:43 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
+
 #include "libft.h"
 
-static	size_t	ft_nlen(int n)
+static	int	digitcount(long int n)
 {
-	size_t	len;
+	int	i;
 
-	len = 0;
-	if (n == 0)
-		len++;
-	else if (n < 0)
-	{
-		len++;
+	i = 1;
+	if (n < 0)
 		n *= -1;
-	}
-	while (n != 0)
+	while (n / 10 >= 0)
 	{
-		n /= 10;
-		len++;
+		n = n / 10;
+		if (n == 0)
+			break ;
+		i++;
 	}
-	return (len);
+	return (i);
+}
+
+static	char	*digitmalloc(long int n)
+{
+	int		i;
+	char	*nb;
+
+	i = digitcount(n);
+	if (n < 0)
+		i = i + 1;
+	nb = malloc (i + 1);
+	if (!nb)
+		return (NULL);
+	nb[i] = '\0';
+	return (nb);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*ret;
-	size_t	size;
-	size_t	i;
+	char		*nb;
+	int			i;
+	long int	nm;
 
-	i = 0;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	size = ft_nlen(n);
-	ret = malloc(sizeof(char) * (size + 1));
-	if (!ret)
+	nm = (long int)n;
+	nb = digitmalloc(nm);
+	if (!nb)
 		return (NULL);
-	ret[size] = '\0';
-	if (n < 0)
+	if (nm < 0)
 	{
-		ret[0] = '-';
-		n *= -1;
-		i = 1;
+		nm *= -1;
+		nb[0] = '-';
 	}
-	while (i < size--)
+	i = digitcount(nm);
+	if ((long int)n >= 0)
+		i--;
+	while (i >= 0)
 	{
-		ret[size] = (n % 10) + '0';
-		n /= 10;
+		nb[i] = nm % 10 + 48;
+		nm = nm / 10;
+		if (nm == 0)
+			break ;
+		i--;
 	}
-	return (ret);
+	return (nb);
 }

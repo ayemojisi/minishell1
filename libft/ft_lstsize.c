@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 15:23:39 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/02 20:31:33 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:14 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list	*lst)
 {
-	int	ret;
+	size_t	i;
 
-	ret = 0;
+	i = 0;
+	if (!lst)
+		return (0);
 	while (lst)
 	{
-		ret++;
 		lst = lst->next;
+		i++;
 	}
-	return (ret);
+	return (i);
 }

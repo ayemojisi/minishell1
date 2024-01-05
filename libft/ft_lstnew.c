@@ -5,20 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 13:37:29 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/02 17:03:41 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:11 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_list	*ft_lstnew(void	*content)
 {
-	t_list	*ret;
+	t_list	*new;
 
-	ret = malloc(sizeof(t_list));
-	if (!ret)
+	new = malloc(sizeof(t_list));
+	if (!new)
 		return (0);
-	ret->content = content;
-	ret->next = 0;
-	return (ret);
+	new->content = content;
+	new->next = 0;
+	return (new);
 }

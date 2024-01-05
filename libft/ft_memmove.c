@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 12:26:34 by maltun            #+#    #+#             */
-/*   Updated: 2023/01/07 01:06:48 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:46:30 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	void	*ret;
+	char	*s;
+	char	*d;
 
-	if (!dst && !src)
-		return (0);
-	ret = dst;
-	if (src < dst)
+	d = (char *)dst;
+	s = (char *)src;
+	if (!len && d == s)
+		return (dst);
+	if (d > s)
 	{
-		src += len;
-		dst += len;
 		while (len--)
-			*(char *)--dst = *(char *)--src;
+			d[len] = s[len];
 	}
 	else
-		while (len--)
-			*(char *)dst++ = *(char *)src++;
-	return (ret);
+		ft_memcpy(d, s, len);
+	return (dst);
 }

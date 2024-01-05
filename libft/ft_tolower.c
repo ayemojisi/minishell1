@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maltun <maltun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*   By: maltun <maltun@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 11:03:38 by maltun            #+#    #+#             */
-/*   Updated: 2022/12/06 11:10:04 by maltun           ###   ########.fr       */
+/*   Created: 2022/12/21 03:49:11 by maltun            #+#    #+#             */
+/*   Updated: 2024/01/05 04:11:05 by maltun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 int	ft_tolower(int c)
 {
-	if (c <= 'Z' && c >= 'A')
-		c += 32;
-	return (c);
+	return (c + 32 * (c >= 65 && c <= 90));
 }
